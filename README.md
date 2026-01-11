@@ -14,7 +14,6 @@
 
 - [Features](#features)
 - [Demo](#demo)
-- [Screenshots](#screenshots)
 - [Technologies](#technologies-used)
 - [Project Structure](#project-structure)
 - [Installation](#installation--setup)
@@ -69,21 +68,6 @@ Replace with your GitHub Pages URL after deployment.
 
 ---
 
-## Screenshots
-
-### Homepage
-![Homepage](./screenshots/homepage.png)
-
-### Menu Page
-![Menu](./screenshots/menu.png)
-
-### Shopping Cart
-![Cart](./screenshots/cart.png)
-
-### AI Recognition
-![AI](./screenshots/ai-recognition.png)
-
----
 
 ## Technologies Used
 
@@ -124,7 +108,6 @@ bean-and-bliss/
 ├── images/
 │   └── logo.png              # Company logo
 │
-├── screenshots/              # Project screenshots
 │
 ├── README.md                 # Project documentation
 ├── LICENSE                   # MIT License
