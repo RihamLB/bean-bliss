@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bean & Bliss - Sip Happiness</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+   
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="logo.png" alt="Bean & Bliss Logo">
+                    <span>Bean & Bliss</span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="pages/menu.html">Menu</a></li>
+                    <li><a href="pages/order.html">Order Online</a></li>
+                    <li><a href="pages/about.html">About Us</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                    <li><a href="Pages/ai-recognition.html">AI Recognition</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Sip Happiness</h1>
+                <p class="hero-subtitle">Experience the perfect blend of premium coffee and homemade cookies</p>
+                <div class="hero-buttons">
+                    <a href="pages/menu.html" class="btn btn-primary">Explore Menu</a>
+                    <a href="pages/order.html" class="btn btn-secondary">Order Now</a>
+                </div>
+                <div class="visitor-card">
+    <div class="visitor-location">
+        📍 <span class="label">Your location</span>
+        <span id="location-text">Detecting...</span>
+    </div>
+
+    <div class="visitor-visits">
+        👥 <span id="visits" class="count">0</span>
+        <span class="label">visits</span>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Premium Coffee</h3>
+                    <p>Cappuccino, Latte, Espresso and more - crafted by expert baristas</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cookie-bite"></i>
+                    </div>
+                    <h3>Signature Cookies</h3>
+                    <p>Homemade cookies in Caramel, Chocolate, and Strawberry flavors</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Pre-Order Available</h3>
+                    <p>Skip the line! Order ahead and pick up at your convenience</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Local Delivery</h3>
+                    <p>We deliver to your door within our local region</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Items Section -->
+    <section class="popular-items">
+        <div class="container">
+            <h2 class="section-title">Our Specialties</h2>
+            <p class="section-subtitle">Taste the difference in every sip and bite</p>
+            
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600" alt="Cappuccino">
+                        <div class="item-badge">Popular</div>
+                    </div>
+                    <div class="item-info">
+                        <h3>Cappuccino</h3>
+                        <p>Rich espresso with steamed milk foam</p>
+                
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=600" alt="Latte">
+                    </div>
+                    <div class="item-info">
+                        <h3>Caffe Latte</h3>
+                        <p>Smooth espresso with steamed milk</p>
+                    
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600" alt="Cookies">
+                        <div class="item-badge">Specialty</div>
+                    </div>
+                    <div class="item-info">
+                        <h3>Signature Cookies</h3>
+                        <p>Caramel, Chocolate & Strawberry</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="pages/menu.html" class="btn btn-primary">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Experience Bean & Bliss?</h2>
+                <p>Order online for pickup or delivery in your local area</p>
+                <a href="pages/order.html" class="btn btn-light">Start Your Order</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Bean & Bliss</h4>
+                    <p>Serving happiness one cup at a time since 2026
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="pages/menu.html">Menu</a></li>
+                        <li><a href="pages/order.html">Order Online</a></li>
+                        <li><a href="pages/about.html">About Us</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Mon - Fri: 7:00 AM - 8:00 PM</li>
+                        <li>Saturday: 8:00 AM - 9:00 PM</li>
+                        <li>Sunday: 8:00 AM - 7:00 PM</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +212608504607</li>
+                        <li><i class="fas fa-envelope"></i> beanandbliss@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Rabat, Morocco</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bean & Bliss. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="analytics.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recognition - Bean & Bliss</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="../logo.png" alt="Bean & Bliss Logo">
+                    <span>Bean & Bliss</span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="order.html">Order Online</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="ai-recognition.html">AI Recognition</a></li>
+
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>🤖 AI Beverage Recognition</h1>
+            <p>Upload a photo of your drink and let AI identify it!</p>
+        </div>
+    </section>
+
+    <!-- AI Recognition Section -->
+    <section class="ai-section">
+        <div class="container">
+            <div class="ai-container">
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <h2><i class="fas fa-camera"></i> Upload Your Beverage Photo</h2>
+                    <p>Take a photo or upload an image of a coffee or beverage</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload or drag & drop</p>
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                    </div>
+
+                    <button class="btn btn-primary" id="uploadBtn">
+                        <i class="fas fa-upload"></i> Choose Image
+                    </button>
+                </div>
+
+                <!-- Image Preview Section -->
+                <div class="preview-section" id="previewSection" style="display: none;">
+                    <h3>📷 Uploaded Image</h3>
+                    <div class="image-container">
+                        <img id="uploadedImage" alt="Uploaded beverage">
+                    </div>
+                    <div class="image-info" id="imageInfo"></div>
+                </div>
+
+                <!-- Loading Section -->
+                <div class="loading-section" id="loadingSection" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>🤖 AI is analyzing your image...</p>
+                    <small>Loading TensorFlow.js model</small>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section" id="resultsSection" style="display: none;">
+                    <h3>🎯 AI Recognition Results</h3>
+                 
+                    <!-- Beverage Type Detection -->
+                    <div class="beverage-type" id="beverageType">
+                        <div class="type-badge" id="typeBadge">
+                            <i class="fas fa-mug-hot"></i>
+                            <span id="typeText">Unknown</span>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="recommendations" id="recommendations">
+                        <h4>📋 Our Recommendations</h4>
+                        <div id="recommendationsList"></div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="analyzeAgainBtn">
+                            <i class="fas fa-redo"></i> Analyze Another Image
+                        </button>
+                        <a href="menu.html" class="btn btn-secondary">
+                            <i class="fas fa-book-open"></i> View Full Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="how-it-works">
+                <h3>🧠 How It Works</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Upload Image</h4>
+                        <p>Take a photo or upload an image of your beverage</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>AI Analysis</h4>
+                        <p>TensorFlow.js MobileNet model analyzes the image</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Get Results</h4>
+                        <p>Receive identification and personalized recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script>
+    
+    <script src="../ia.js"></script>
+    <script src="../main.js"></script>
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Bean & Bliss</h4>
+                <p>Serving happiness one cup at a time since 2026</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="pages/menu.html">Menu</a></li>
+                    <li><a href="pages/order.html">Order Online</a></li>
+                    <li><a href="pages/about.html">About Us</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Opening Hours</h4>
+                <ul>
+                    <li>Mon - Fri: 7:00 AM - 8:00 PM</li>
+                    <li>Saturday: 8:00 AM - 9:00 PM</li>
+                    <li>Sunday: 8:00 AM - 7:00 PM</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +212608504607</li>
+                    <li><i class="fas fa-envelope"></i> beanandbliss@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Rabat, Morocco</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bean & Bliss. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online - Bean & Bliss</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .order-selection {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .menu-items-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .item-category {
+            margin-bottom: 2rem;
+        }
+
+        .item-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .qty-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .qty-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .add-to-cart-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .add-to-cart-btn.added {
+            background: #4CAF50;
+        }
+
+        .mini-cart {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .mini-cart h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cart-qty-control {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .cart-qty-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .cart-qty-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .cart-qty-display {
+            min-width: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: #ff4444;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .cart-summary {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-row {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: #999;
+            padding: 2rem 0;
+        }
+
+        /* Checkout Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .checkout-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 968px) {
+            .order-selection {
+                grid-template-columns: 1fr;
+            }
+
+            .mini-cart {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="../logo.png" alt="Bean & Bliss Logo">
+                    <span>Bean & Bliss</span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="order.html" class="active">Order Online</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="ai-recognition.html">AI Recognition</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-shopping-bag"></i> Order Online</h1>
+            <p>Select your items and proceed to checkout</p>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section class="order-section">
+        <div class="container">
+            <div class="order-selection">
+                <!-- Menu Items -->
+                <div class="menu-items-section">
+                    <h2 style="font-family: 'Playfair Display', serif; color: var(--primary-color); margin-bottom: 1.5rem;">
+                        <i class="fas fa-coffee"></i> Our Menu
+                    </h2>
+
+                    <!-- Coffee Category -->
+                    <div class="item-category">
+                        <h3><i class="fas fa-mug-hot"></i> Coffee</h3>
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Espresso</div>
+                                <div class="item-price">11 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('espresso', -1)">-</button>
+                                    <span class="qty-display" id="qty-espresso">0</span>
+                                    <button class="qty-btn" onclick="changeQty('espresso', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('espresso', 'Espresso', 35)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Cappuccino</div>
+                                <div class="item-price">18 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('cappuccino', -1)">-</button>
+                                    <span class="qty-display" id="qty-cappuccino">0</span>
+                                    <button class="qty-btn" onclick="changeQty('cappuccino', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('cappuccino', 'Cappuccino', 45)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Caffe Latte</div>
+                                <div class="item-price">16 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('latte', -1)">-</button>
+                                    <span class="qty-display" id="qty-latte">0</span>
+                                    <button class="qty-btn" onclick="changeQty('latte', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('latte', 'Caffe Latte', 47)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Americano</div>
+                                <div class="item-price">21 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('americano', -1)">-</button>
+                                    <span class="qty-display" id="qty-americano">0</span>
+                                    <button class="qty-btn" onclick="changeQty('americano', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('americano', 'Americano', 37)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Mocha</div>
+                                <div class="item-price">23 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('mocha', -1)">-</button>
+                                    <span class="qty-display" id="qty-mocha">0</span>
+                                    <button class="qty-btn" onclick="changeQty('mocha', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('mocha', 'Mocha', 52)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Macchiato</div>
+                                <div class="item-price">25 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('macchiato', -1)">-</button>
+                                    <span class="qty-display" id="qty-macchiato">0</span>
+                                    <button class="qty-btn" onclick="changeQty('macchiato', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('macchiato', 'Macchiato', 40)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cookies Category -->
+                    <div class="item-category">
+                        <h3><i class="fas fa-cookie"></i> Cookies</h3>
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Caramel Cookie</div>
+                                <div class="item-price">12 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('caramel', -1)">-</button>
+                                    <span class="qty-display" id="qty-caramel">0</span>
+                                    <button class="qty-btn" onclick="changeQty('caramel', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('caramel', 'Caramel Cookie', 29)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Chocolate Cookie</div>
+                                <div class="item-price">12 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('chocolate', -1)">-</button>
+                                    <span class="qty-display" id="qty-chocolate">0</span>
+                                    <button class="qty-btn" onclick="changeQty('chocolate', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('chocolate', 'Chocolate Cookie', 29)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Strawberry Cookie</div>
+                                <div class="item-price">15 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('strawberry', -1)">-</button>
+                                    <span class="qty-display" id="qty-strawberry">0</span>
+                                    <button class="qty-btn" onclick="changeQty('strawberry', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('strawberry', 'Strawberry Cookie', 29)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">Cookie Pack (6)</div>
+                                <div class="item-price">62 DH</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQty('pack', -1)">-</button>
+                                    <span class="qty-display" id="qty-pack">0</span>
+                                    <button class="qty-btn" onclick="changeQty('pack', 1)">+</button>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCart('pack', 'Cookie Pack (6)', 159)">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mini Cart -->
+                <div class="mini-cart">
+                    <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+                    <div id="cartItems">
+                        <div class="empty-cart-msg">
+                            <i class="fas fa-shopping-basket" style="font-size: 2rem; color: #ddd; margin-bottom: 0.5rem;"></i>
+                            <p>Your cart is empty</p>
+                        </div>
+                    </div>
+                    <div class="cart-summary" id="cartSummary" style="display: none;">
+                        <div class="summary-row total-row">
+                            <span>Total:</span>
+                            <span id="total">0 DH</span>
+                        </div>
+                    </div>
+                    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckoutModal()" disabled>
+                        <i class="fas fa-check-circle"></i> Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-clipboard-check"></i> Checkout</h2>
+                <button class="close-modal" onclick="closeCheckoutModal()">&times;</button>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="checkout-section">
+                <h3><i class="fas fa-receipt"></i> Order Summary</h3>
+                <div id="checkoutOrderSummary"></div>
+                <div class="summary-row total-row" style="margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--primary-color);">
+                    <span>Total:</span>
+                    <span id="checkoutTotal">0 DH</span>
+                </div>
+            </div>
+
+            <!-- Customer Information Form -->
+            <div class="checkout-section">
+                <h3><i class="fas fa-user"></i> Your Information</h3>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" name="customerName" required 
+                               pattern="[A-Za-zÀ-ÿ\s]+" 
+                               title="Please enter only letters"
+                               onkeypress="return /[A-Za-zÀ-ÿ\s]/i.test(event.key)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number *</label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required 
+                               placeholder="+212..." 
+                               pattern="[0-9+\-\s()]+"
+                               title="Please enter only numbers"
+                               onkeypress="return /[0-9+\-\s()]/.test(event.key)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerEmail">Email</label>
+                        <input type="email" id="customerEmail" name="customerEmail" placeholder="Optional">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Order Type *</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="radio" name="orderType" value="pickup" checked onclick="toggleAddress()">
+                                Pickup
+                            </label>
+                            <label>
+                                <input type="radio" name="orderType" value="delivery" onclick="toggleAddress()">
+                                Delivery
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="deliveryAddressGroup" style="display: none;">
+                        <label for="deliveryAddress">Delivery Address *</label>
+                        <textarea id="deliveryAddress" name="deliveryAddress" rows="3" placeholder="Street, Building, Floor..."></textarea>
+                        <small style="color: #666;">We deliver within Rabat area only</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialNotes">Special Instructions</label>
+                        <textarea id="specialNotes" name="specialNotes" rows="2" placeholder="Any special requests..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-check-double"></i> Confirm Order
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Bean & Bliss</h4>
+                    <p>Serving happiness one cup at a time since 2026</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="order.html">Order Online</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Mon - Fri: 7:00 AM - 8:00 PM</li>
+                        <li>Saturday: 8:00 AM - 9:00 PM</li>
+                        <li>Sunday: 8:00 AM - 7:00 PM</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +212608504607</li>
+                        <li><i class="fas fa-envelope"></i> beanandbliss@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Rabat, Morocco</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bean & Bliss. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        let cart = [];
+        let quantities = {};
+
+        function changeQty(itemId, change) {
+            if (!quantities[itemId]) quantities[itemId] = 0;
+            quantities[itemId] = Math.max(0, quantities[itemId] + change);
+            document.getElementById('qty-' + itemId).textContent = quantities[itemId];
+        }
+
+        function addToCart(itemId, itemName, itemPrice) {
+            const qty = quantities[itemId] || 0;
+            if (qty === 0) {
+                alert('Please select a quantity first!');
+                return;
+            }
+
+            const existingItem = cart.find(item => item.id === itemId);
+            if (existingItem) {
+                existingItem.quantity += qty;
+            } else {
+                cart.push({
+                    id: itemId,
+                    name: itemName,
+                    price: itemPrice,
+                    quantity: qty
+                });
+            }
+
+            quantities[itemId] = 0;
+            document.getElementById('qty-' + itemId).textContent = '0';
+            updateCart();
+            
+            const btn = event.target.closest('.add-to-cart-btn');
+            btn.classList.add('added');
+            btn.innerHTML = '<i class="fas fa-check"></i> Added';
+            setTimeout(() => {
+                btn.classList.remove('added');
+                btn.innerHTML = '<i class="fas fa-cart-plus"></i>';
+            }, 1500);
+        }
+
+        function updateCartQty(itemId, change) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemId);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartSummary = document.getElementById('cartSummary');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = `
+                    <div class="empty-cart-msg">
+                        <i class="fas fa-shopping-basket" style="font-size: 2rem; color: #ddd; margin-bottom: 0.5rem;"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                cartSummary.style.display = 'none';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-details">
+                                <div class="cart-qty-control">
+                                    <button class="cart-qty-btn" onclick="updateCartQty('${item.id}', -1)">-</button>
+                                    <span class="cart-qty-display">${item.quantity}</span>
+                                    <button class="cart-qty-btn" onclick="updateCartQty('${item.id}', 1)">+</button>
+                                </div>
+                                <span class="cart-item-price">${itemTotal} DH</span>
+                            </div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart('${item.id}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            cartItemsDiv.innerHTML = html;
+            document.getElementById('total').textContent = total + ' DH';
+            cartSummary.style.display = 'block';
+            checkoutBtn.disabled = false;
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            
+            // Update checkout summary
+            let summaryHtml = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                summaryHtml += `
+                    <div class="order-summary-item">
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>${itemTotal} DH</span>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('checkoutOrderSummary').innerHTML = summaryHtml;
+            document.getElementById('checkoutTotal').textContent = total + ' DH';
+            document.getElementById('checkoutModal').classList.add('show');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.remove('show');
+        }
+
+        function toggleAddress() {
+            const addressGroup = document.getElementById('deliveryAddressGroup');
+            const deliveryRadio = document.querySelector('input[name="orderType"][value="delivery"]');
+            const addressField = document.getElementById('deliveryAddress');
+            
+            if (deliveryRadio.checked) {
+                addressGroup.style.display = 'block';
+                addressField.required = true;
+            } else {
+                addressGroup.style.display = 'none';
+                addressField.required = false;
+            }
+        }
+
+        // Handle checkout form submission
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const orderType = formData.get('orderType');
+            const customerName = formData.get('customerName');
+            const customerPhone = formData.get('customerPhone');
+            
+            // Create order summary
+            let orderDetails = `
+🎉 ORDER CONFIRMED! 🎉
+
+Customer: ${customerName}
+Phone: ${customerPhone}
+Type: ${orderType === 'pickup' ? 'Pickup' : 'Delivery'}
+${orderType === 'delivery' ? 'Address: ' + formData.get('deliveryAddress') : ''}
+
+Items:
+`;
+            
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                orderDetails += `- ${item.name} x${item.quantity} = ${itemTotal} DH\n`;
+            });
+            
+            orderDetails += `\nTotal: ${total} DH`;
+            
+            alert(orderDetails + '\n\nThank you for your order! We will contact you shortly.');
+            
+            // Clear cart and close modal
+            cart = [];
+            localStorage.removeItem('cart');
+            updateCart();
+            closeCheckoutModal();
+            this.reset();
+        });
+
+        // Load cart on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCart();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('checkoutModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCheckoutModal();
+            }
+        });
+    </script>
+</body>
+</html>
