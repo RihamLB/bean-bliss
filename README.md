@@ -7,7 +7,7 @@
 ## Features
 
 ### Frontend
-- Fully responsive design (Mobile, Tablet, Desktop)
+- Fully responsive design 
 - Modern UI/UX with smooth animations
 - Interactive navigation with hamburger menu
 - Dynamic shopping cart system
