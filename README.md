@@ -78,9 +78,6 @@ bean-and-bliss/
 │
 │
 ├── README.md                 # Project documentation
-├── LICENSE                   # MIT License
-└── .gitignore               # Git ignore file
-```
 
 ---
 
